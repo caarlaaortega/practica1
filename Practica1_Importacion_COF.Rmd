@@ -301,4 +301,12 @@ head(fichero6)
 tail(fichero6)
 summary(fichero6)
 ```
+### Exportar datos en formato JSON 
+
+```{r}
+# Teniendo en cuenta la nomenclatura que he usado en la práctica, iris.Rdata es realmente fichero4.Rdata :)
+load('./data/results/fichero4.Rdata')
+write_json(fichero4, path='./data/results/iris_json_v2.json')
+
+```
 
