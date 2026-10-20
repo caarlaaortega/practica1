@@ -209,3 +209,12 @@ save(fichero4, file= './data/results/fichero4.Rdata')
 
 
 ### Inspección de los datos
+Se trata de un dataframe con 150 observaciones y 5 variables. Las variables son las que se han especificado antes: la longitud y la amplitud del sepalo, del pétalo, y la clase a la que pertenece. En este caso, podemos obtener información estadística de la longitud y amplitud del pétalo y del sépalo, pues son variables numéricas. 
+
+```{r}
+str(fichero4)
+head(fichero4)
+tail(fichero4)
+summary(fichero4)
+```
+
