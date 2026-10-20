@@ -275,13 +275,30 @@ tail(fichero5)
 summary(fichero5)
 ```
 
-## 2.6 Fichero 6 
+## 2.6 Fichero 6
 
-### Importación del fichero 
+### Importación del fichero
+
+Se puede leer perfectamente el archivo json de iris, tal como se ve en
+la imagen:
+
+![](images/clipboard-2231691988.png){width="294"}
+
+La principal diferencia entre read_json y fromJSON es que en el primero es necesario especificar que simplifique el vector para obtener un dataframe y no una lista de listas; mientras que en el segundo, lo importa directamente como un dataframe. 
 
 ```{r}
-
+fichero6 <- read_json('./data/iris_json.json', simplifyVector = TRUE)
+fichero6_02 <- fromJSON('./data/iris_json.json')
+save(fichero6, file='./data/results/fichero6.Rdata')
 ```
 
+### Inspección de los datos
+Podemos ver que se trata de un dataframe con 150 observaciones, con 5 variables (que son la longitud, amplitud del sépalo y pétalo, y la clasificación de cada observación). 
 
-### Inspección de los datos 
+```{r}
+str(fichero6)
+head(fichero6)
+tail(fichero6)
+summary(fichero6)
+```
+
