@@ -158,4 +158,29 @@ head(bakery_sales_revised)
 tail(bakery_sales_revised)
 summary(bakery_sales_revised)
 ```
+## 2.3 Fichero 3 
 
+### Importación del fichero
+
+```{r}
+library(haven) # importamos la librería haven para leer el fichero
+
+fichero3 <- read_sav(file='./data/PsychBike.sav')
+save(fichero3, file='./data/results/fichero3.Rdata')
+```
+
+
+### Inspección de los datos
+Con las funciones aplicadas, tenemos una visión general del dataframe. Cuenta con 2355 observaciones, y 6 variables. Las variables son: vehicle, colour, hour, helmet, distance from kerb, y passing distance. 
+En este caso, debido a la versión de R, summary tampoco funciona (da un error ). En este caso vamos a intentar solucionar el error, transformando las columnas a caracteres: 
+
+```{r}
+str(fichero3)
+head(fichero3)
+tail(fichero3)
+#summary(fichero3)
+```
+
+## 2.4 Fichero 4
+
+### 
