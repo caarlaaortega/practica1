@@ -136,8 +136,8 @@ para las variables categóricas.
 
 ### Importación del fichero
 
-![](images/clipboard-1862429613.png)
-Se ha importado todo correctamente, no ha sido necesario aplicar ningún cambio. 
+![](images/clipboard-1862429613.png) Se ha importado todo correctamente,
+no ha sido necesario aplicar ningún cambio.
 
 ```{r}
 # Guardamos el fichero: 
@@ -146,11 +146,16 @@ save(bakery_sales_revised, file = './data/results/fichero2.Rdata')
 
 ### Inspección de los datos
 
-str() | Se trata deun dataframe con 20507 observaciones y 5 variables, donde estas son: transaction, item, date_time, period_day, weekday_weekend
+str() \| Se trata deun dataframe con 20507 observaciones y 5 variables,
+donde estas son: transaction, item, date_time, period_day,
+weekday_weekend
 
-dim() | Da las dimensiones del dataframe: 20507 observaciones y 5 variables
+dim() \| Da las dimensiones del dataframe: 20507 observaciones y 5
+variables
 
-summary() | En este caso, no da error por el tipo de los datos, y nos ofrece un resumen estadístico de las variables del dataframe
+summary() \| En este caso, no da error por el tipo de los datos, y nos
+ofrece un resumen estadístico de las variables del dataframe
+
 ```{r}
 str(bakery_sales_revised)
 dim(bakery_sales_revised)
@@ -158,7 +163,8 @@ head(bakery_sales_revised)
 tail(bakery_sales_revised)
 summary(bakery_sales_revised)
 ```
-## 2.3 Fichero 3 
+
+## 2.3 Fichero 3
 
 ### Importación del fichero
 
@@ -169,10 +175,14 @@ fichero3 <- read_sav(file='./data/PsychBike.sav')
 save(fichero3, file='./data/results/fichero3.Rdata')
 ```
 
-
 ### Inspección de los datos
-Con las funciones aplicadas, tenemos una visión general del dataframe. Cuenta con 2355 observaciones, y 6 variables. Las variables son: vehicle, colour, hour, helmet, distance from kerb, y passing distance. 
-En este caso, debido a la versión de R, summary tampoco funciona (da un error ). En este caso vamos a intentar solucionar el error, transformando las columnas a caracteres: 
+
+Con las funciones aplicadas, tenemos una visión general del dataframe.
+Cuenta con 2355 observaciones, y 6 variables. Las variables son:
+vehicle, colour, hour, helmet, distance from kerb, y passing distance.
+En este caso, debido a la versión de R, summary tampoco funciona (da un
+error ). En este caso vamos a intentar solucionar el error,
+transformando las columnas a caracteres:
 
 ```{r}
 str(fichero3)
@@ -196,7 +206,6 @@ summary(fichero3)
 iris <- unzip('./data/iris.zip')
 ```
 
-
 ### Importación del fichero
 
 ```{r}
@@ -207,9 +216,13 @@ save(fichero4, file= './data/results/fichero4.Rdata')
 
 ```
 
-
 ### Inspección de los datos
-Se trata de un dataframe con 150 observaciones y 5 variables. Las variables son las que se han especificado antes: la longitud y la amplitud del sepalo, del pétalo, y la clase a la que pertenece. En este caso, podemos obtener información estadística de la longitud y amplitud del pétalo y del sépalo, pues son variables numéricas. 
+
+Se trata de un dataframe con 150 observaciones y 5 variables. Las
+variables son las que se han especificado antes: la longitud y la
+amplitud del sepalo, del pétalo, y la clase a la que pertenece. En este
+caso, podemos obtener información estadística de la longitud y amplitud
+del pétalo y del sépalo, pues son variables numéricas.
 
 ```{r}
 str(fichero4)
@@ -218,3 +231,46 @@ tail(fichero4)
 summary(fichero4)
 ```
 
+## 2.5 Fichero 5
+
+### Importación del fichero
+
+Podemos ver que, al abrir el fichero .json, se pueden leer las variables
+de cada una de las observaciones. En la imagen se muestra la primera
+observación:
+
+![](images/clipboard-3112729059.png)
+
+Con el parámetro de read_json(), simplifyVector, nos permite contar con
+todas las observaciones del json - sin ponerlo, nos aparecerían listas
+de listas, donde cada lista es una observación con sus respectivas
+variables.
+
+![](images/clipboard-862804522.png){width="328"}
+
+Al poner el parámetro simplifyVector = TRUE, nos convierte esta lista de
+listas en un dataframe, pudiendo acceder mejor a los datos.
+
+![](images/clipboard-3534591054.png){width="324"}
+
+```{r}
+# Importamos la librería requerida: 
+library(jsonlite)
+fichero5 <- read_json(path = './data/FileCodificado.json', simplifyVector = TRUE)
+save(fichero5, file='./data/results/fichero5.Rdata')
+```
+
+### Inspección de los datos
+
+Se trata de un dataframe con 83 observaciones o instancias y 22
+variables; estas variables son entre otras: carburante, potencia,
+servicio_vehiculo, actividad_vehiculo, GAMA... Con summary obtenemos
+información estadística relevante de cada variable, ya sea numérica o
+categórica.
+
+```{r}
+str(fichero5)
+head(fichero5)
+tail(fichero5)
+summary(fichero5)
+```
