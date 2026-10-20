@@ -274,3 +274,14 @@ head(fichero5)
 tail(fichero5)
 summary(fichero5)
 ```
+
+## 2.6 Fichero 6 
+
+### Importación del fichero 
+
+```{r}
+
+```
+
+
+### Inspección de los datos 
