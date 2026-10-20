@@ -147,8 +147,15 @@ save(bakery_sales_revised, file = './data/results/fichero2.Rdata')
 ### Inspección de los datos
 
 str() | Se trata deun dataframe con 20507 observaciones y 5 variables, donde estas son: transaction, item, date_time, period_day, weekday_weekend
+
+dim() | Da las dimensiones del dataframe: 20507 observaciones y 5 variables
+
+summary() | En este caso, no da error por el tipo de los datos, y nos ofrece un resumen estadístico de las variables del dataframe
 ```{r}
 str(bakery_sales_revised)
 dim(bakery_sales_revised)
+head(bakery_sales_revised)
+tail(bakery_sales_revised)
+summary(bakery_sales_revised)
 ```
 
