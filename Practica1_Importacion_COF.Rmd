@@ -1,0 +1,154 @@
+---
+title: "Práctica 1 | Importación"
+author: "Carla Ortega Fernández"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    echo: true
+    number_sections: true
+    theme: lumen
+    toc: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+  html_notebook:
+    echo: true
+    number_sections: true
+    toc: true
+  bookdown::pdf_document2:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    figure_caption: "Figura" # Referencias en castellano
+    table_caption: "Tabla"
+  bookdown::html_document2:
+    echo: true
+    number_sections: true
+    theme: spacelab
+    toc: true
+    figure_caption: "Figura"
+    table_caption: "Tabla"
+always_allow_html: true
+params:
+  lang: ES
+lang: "`r switch(params$lang, ES = 'es-ES', EN = 'en-US')`"
+subtitle: "Introducción a la Ciencia de Datos. Máster en Ciencia de Datos- UV"
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    def: 'Definición '
+    cor: 'Corolario '
+    prp: 'Proposición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    proof: 'Demostración. '
+    remark: 'Nota: '
+    solution: 'Solución. '
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# 1 Introducción
+
+Los ficheros a importar son los siguientes: 1. DFP1_11122015 124700.csv
+———————————————————————\> Deposito.RData 2. “Transactions from a Bakery”
+(Kaggle) ——————————\> BreadBasket.RData 3. (SPSS) PsychBike.sav
+———————————————————————————\> PsychBike.RData 4. FileCodificado.json
+————————————————————————————\> FileCodificado.RData 5. iris_json.json
+-----————————————————————————————\> iris.RData 6. ERCA.xls
+———————————————————————————————————————\> ERCA.RData 7. subjectInfo.xlsx
+———————————————————————————————\> Pacientes.RData 8. Robot.hdf5
+—————————————————————————————————————\> Robot.RData
+
+El objetivo de la práctica es realizar la importación de ficheros con
+diferentes formatos, organizar los datos en un data frame y almacenarlo
+en un fichero tipo RData.
+
+# 2 Importación de ficheros
+
+```{r}
+library(hms)
+```
+
+## 2.1 Fichero DFP1_11122015 124700.csv
+
+### Importación del fichero
+
+Usando la herramienta de importación base y readr tenemos:
+
+BASE
+
+![](images/clipboard-2914206037.png){width="398"}
+
+READR
+
+![](images/clipboard-2730321792.png){width="449"}
+
+Como podemos ver, se ha importado el dataset .csv correctamente con el
+método de "base" pero no con el "readr"; en el primer caso se han podido
+importar todas las variables y las filas adecuadamente, pero en el caso
+de "readr" no se ha conseguido separar las variables de cada fila, por
+lo que se cuenta únicamente con una variable (no se han importado bien
+los datos).
+
+Por ello vamos a recurrir a la importación (mediante código) usando la
+función propia de base, read.csv:
+
+```{r}
+fichero1 <- read.csv(file = './data/DFP1_11122015 124700.csv', stringsAsFactors = FALSE, sep='\t') # la separación es un tabulador
+summary(fichero1)
+fichero1$FECHA <- as.POSIXlt(fichero1$FECHA, format='%d/%m/%Y')
+fichero1$HORA <- as_hms(fichero1$HORA)
+save(fichero1, file='./data/results/fichero1.RData')
+```
+
+### Inspección de los datos
+
+```{r}
+str(fichero1)
+head(fichero1)
+tail(fichero1)
+```
+
+Con str() podemos obtener información acerca de la estructura, que en
+este caso son todas las variables que hay (5), el tipo de dato de la
+variable, y los valores las filas para cada variable. También indica el
+objeto que es, un dataframe, y el número de observaciones, 8887.
+
+Con head() obtenemos las primeras 6 filas del dataframe. Con tail()
+obtenemos las últimas 6 filas del dataframe.
+
+En este caso, summary() da error por que hemos convertido el formato de
+la fecha, al tipo fecha (un tipo especial). Sin esta conversión,
+summary() nos ofrece información estadística relevante de cada variable
+del dataframe, como su mínimo, máximo, primer y tercer cuartiles, la
+media y la mediana, en las variables continuas; y el mínimo de
+caracteres, máximo de caracteres, el número de observaciones vacias,
+para las variables categóricas.
+
+## 2.2 Fichero 2
+
+### Importación del fichero
+
+![](images/clipboard-1862429613.png)
+Se ha importado todo correctamente, no ha sido necesario aplicar ningún cambio. 
+
+```{r}
+# Guardamos el fichero: 
+save(bakery_sales_revised, file = './data/results/fichero2.Rdata')
+```
+
+### Inspección de los datos
+
+str() | Se trata deun dataframe con 20507 observaciones y 5 variables, donde estas son: transaction, item, date_time, period_day, weekday_weekend
+```{r}
+str(bakery_sales_revised)
+dim(bakery_sales_revised)
+```
+
