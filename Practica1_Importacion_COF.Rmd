@@ -190,4 +190,22 @@ summary(fichero3)
 
 ## 2.4 Fichero 4
 
-### 
+### Descomprimir fichero
+
+```{r}
+iris <- unzip('./data/iris.zip')
+```
+
+
+### Importación del fichero
+
+```{r}
+fichero4 <- read.table(iris[3], sep=',')
+# Cargamos la tabla, y cambiamos el nombre de las columnas, teniendo en cuenta su nombre real:
+colnames(fichero4) <- c('Sepal_length', 'Sepal_width', 'petal_length', 'petal_width', 'class') 
+save(fichero4, file= './data/results/fichero4.Rdata')
+
+```
+
+
+### Inspección de los datos
