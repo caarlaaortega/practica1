@@ -178,7 +178,14 @@ En este caso, debido a la versión de R, summary tampoco funciona (da un error )
 str(fichero3)
 head(fichero3)
 tail(fichero3)
-#summary(fichero3)
+# Resolución del error:
+fichero3$vehicle <- as.character(fichero3$vehicle)
+fichero3$Colour <- as.character(fichero3$colour)
+fichero3$hour <- as.character(fichero3$hour)
+fichero3$helmet <- as.character(fichero3$helmet)
+fichero3$Distance_from_kerb <- as.character(fichero3$Distance_from_kerb)
+fichero3$Passing_distance <- as.character(fichero3$Passing_distance)
+summary(fichero3)
 ```
 
 ## 2.4 Fichero 4
